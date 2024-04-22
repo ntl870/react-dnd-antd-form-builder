@@ -1,41 +1,25 @@
-import { useState } from "react";
 import { useRef, useState } from "react";
-import { Button, Form, Layout, Popover, Skeleton, Spin, Tabs } from "antd";
-import { useParams, useSearchParams } from "react-router-dom";
 import { useImmer } from "use-immer";
-import { StarsSVG } from "#/assets/svg";
-import CreateDocumentHeader from "#/containers/Compliances/Documents/components/CreateDocumentHeader";
-import DocumentLinkedControl from "#/containers/Compliances/Documents/components/DocumentLinkedControl";
-import EditUploadDocument from "#/containers/Compliances/Documents/components/EditUploadDocument";
-import LinkedTasks from "#/containers/Compliances/Documents/components/LinkedTasks";
-import { CreateFormTabKey } from "#/containers/Compliances/Documents/constants/documents";
-import CreateDocument from "#/containers/Compliances/Documents/CreateDocument";
-import useDocumentPermission from "#/containers/Compliances/Documents/hooks/useDocumentPermission";
-import useFormBuilderTabs from "#/containers/Compliances/Documents/hooks/useFormBuilderTabs";
-import type {
-  DocumentEditorTabsRef,
-  DocumentUploaderRef,
-} from "#/containers/Compliances/Documents/interfaces/document.types";
-import type { DraggableField } from "#/containers/Compliances/Documents/interfaces/draggableFields.types";
-import type { CreateDocumentFormValues } from "#/containers/Compliances/Documents/interfaces/form.types";
-import { renderDocumentTabBar } from "#/containers/Compliances/Documents/utils/documents";
-import ViewTaskDrawer from "#/containers/OutstandingTasks/components/modals/ViewTaskDrawer";
-import type {
-  DocumentFragment,
-  DraftLinkedTaskFragment,
-} from "#/generated/schemas";
+import CurrentForm from "./components/FormBuilder/Builder/CurrentForm";
+import DraggableSidebarField from "./components/FormBuilder/Builder/DraggableSidebarField";
+import { getDefaultState } from "./utils/form-renderer";
+import { createSpacer, getDuplicateFieldState } from "./utils/tools";
 import {
-  DocumentStatus,
-  IsoStandard,
-  useGetDocumentQuery,
-  useGetDocumentTemplateQuery,
-} from "#/generated/schemas";
-import ColorfulButton from "#/shared/components/buttons/ColorfulButton";
-import ConditionalWrapper from "#/shared/components/wrappers/ConditionalWrapper";
-import { VisibilityValue } from "#/shared/constants/select";
-import { LOCAL_STORAGE_DOCUMENT_AI_CONVERT_GUIDE } from "#/shared/constants/storage-key";
-import useAIConversionTour from "#/shared/hooks/useAIConversionTour";
-import FormPreviewerContainer from "../FormPreviewerContainer";
+  DragStartEvent,
+  DragOverEvent,
+  DragEndEvent,
+  DndContext,
+  DragOverlay,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { FormBuilderFieldType } from "./constants/formBuilder";
+import { DraggableField } from "./types/draggableFields.types";
+import { FormBuilderContext } from "./contexts/FormBuilderContext";
+import FormBuilderSidebar from "./components/FormBuilderSidebar";
 
 function App() {
   const [data, updateData] = useImmer<{ fields: DraggableField[] }>({
@@ -201,7 +185,7 @@ function App() {
       });
     }
 
-    setSidebarFieldsRegenKey(getUUID());
+    setSidebarFieldsRegenKey(crypto.randomUUID());
     cleanUp();
   };
 
@@ -262,39 +246,41 @@ function App() {
   };
 
   return (
-    <DndContext
-      autoScroll
-      onDragEnd={handleDragEnd}
-      onDragOver={handleDragOver}
-      onDragStart={handleDragStart}
-    >
-      <Sidebar fieldsRegKey={sidebarFieldsRegenKey} />
-      <SortableContext
-        items={data.fields.map((field) => field.id)}
-        strategy={verticalListSortingStrategy}
+    <div className="flex flex-1 flex-row bg-gray-100">
+      <DndContext
+        autoScroll
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+        onDragStart={handleDragStart}
       >
-        <FormBuilderContext.Provider
-          value={{
-            currentDragfield: currentDragFieldRef.current,
-            dupplicateField,
-            fields: data.fields,
-            getFieldById,
-            onEndEdit,
-            onRemoveField,
-            onStartEdit,
-            updateFieldsData: updateData,
-          }}
+        <FormBuilderSidebar fieldsRegKey={sidebarFieldsRegenKey} />
+        <SortableContext
+          items={data.fields.map((field) => field.id)}
+          strategy={verticalListSortingStrategy}
         >
-          <CurrentForm />
-        </FormBuilderContext.Provider>
-      </SortableContext>
+          <FormBuilderContext.Provider
+            value={{
+              currentDragfield: currentDragFieldRef.current,
+              dupplicateField,
+              fields: data.fields,
+              getFieldById,
+              onEndEdit,
+              onRemoveField,
+              onStartEdit,
+              updateFieldsData: updateData,
+            }}
+          >
+            <CurrentForm />
+          </FormBuilderContext.Provider>
+        </SortableContext>
 
-      <DragOverlay>
-        {activeSidebarField ? (
-          <DraggableSidebarField field={activeSidebarField} />
-        ) : null}
-      </DragOverlay>
-    </DndContext>
+        <DragOverlay>
+          {activeSidebarField ? (
+            <DraggableSidebarField field={activeSidebarField} />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+    </div>
   );
 }
 
