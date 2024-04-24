@@ -29,17 +29,17 @@ function EditFieldSectionToolbar({
     <>
       <Divider className="mb-2" />
       <div className="flex flex-row items-center justify-end">
-        <Button className="p-0 w-6 h-6" onClick={onRemoveField} type="link">
+        <Button onClick={onRemoveField} type="link">
           Remove
         </Button>
-        <Button className="p-0 w-6 h-6" onClick={onDupplicateField} type="link">
+        <Button onClick={onDupplicateField} type="link">
           Dupplicate
         </Button>
         {!hideRequiredSwitch && (
           <>
             <Divider className="mx-2" type="vertical" />
             <div className="flex items-center">
-              <Typography.Text className=" text-xs mr-2">
+              <Typography.Text className="text-xs mr-2">
                 Required
               </Typography.Text>
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { FormProps } from "antd";
-import { Form } from "antd";
+import { Button, Form, notification } from "antd";
 import FormPreviewer from "../FormPreviewer";
 import { DraggableField } from "../../../../types/draggableFields.types";
 
@@ -23,15 +23,27 @@ export default function FormPreviewerContainer({
     form.setFieldsValue(initialValues);
   }, [form, initialValues]);
 
+  const onCopyData = () => {
+    navigator.clipboard.writeText(JSON.stringify(forms));
+    notification.success({
+      message: "JSON data copied",
+    });
+  };
+
   return (
-    <Form
-      form={form}
-      initialValues={initialValues}
-      layout="vertical"
-      preserve={false}
-      {...restFormProps}
-    >
-      <FormPreviewer forms={forms} isEdit={isEdit} isFill={isFill} />
-    </Form>
+    <div className="relative">
+      <Form
+        form={form}
+        initialValues={initialValues}
+        layout="vertical"
+        preserve={false}
+        {...restFormProps}
+      >
+        <FormPreviewer forms={forms} isEdit={isEdit} isFill={isFill} />
+      </Form>
+      <Button className="block absolute top-0" onClick={onCopyData}>
+        Copy JSON data
+      </Button>
+    </div>
   );
 }
