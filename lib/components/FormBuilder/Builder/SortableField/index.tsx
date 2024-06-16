@@ -1,10 +1,10 @@
 import { type CSSProperties, useContext } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { DragField } from "../DragField";
 import DragHandle from "../DragHandle";
 import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
 import { DraggableField } from "../../../../types/draggableFields.types";
+import DragField from "../DragField";
 
 interface Props {
   id: string;

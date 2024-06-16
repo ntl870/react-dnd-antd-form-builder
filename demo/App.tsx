@@ -1,18 +1,18 @@
 import { useImmer } from "use-immer";
-import { DraggableField } from "./types/draggableFields.types";
 import EditForm from "./components/EditForm";
 import { Tabs } from "antd";
-import FormPreviewerContainer from "./components/FormBuilder/Builder/FormPreviewerContainer";
+import FormPreviewerContainer from "../lib/components/FormBuilder/Builder/FormPreviewerContainer";
+import { DraggableField } from "../lib/types/draggableFields.types";
 
 function App() {
-  const [data, updateData] = useImmer<{ fields: DraggableField[] }>({
+  const [data, _] = useImmer<{ fields: DraggableField[] }>({
     fields: [],
   });
 
   const tabs = [
     {
       label: "Form Builder",
-      children: <EditForm data={data} updateData={updateData} />,
+      children: <EditForm />,
       key: "0",
     },
     {

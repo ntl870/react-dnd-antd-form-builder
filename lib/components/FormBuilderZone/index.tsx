@@ -5,13 +5,7 @@ import {
   DndContext,
   DragOverlay,
 } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import { useState, useRef } from "react";
-import { Updater } from "use-immer";
 import { FormBuilderFieldType } from "../../constants/formBuilder";
 import { FormBuilderContext } from "../../contexts/FormBuilderContext";
 import { DraggableField } from "../../types/draggableFields.types";
@@ -19,19 +13,22 @@ import { getDefaultState } from "../../utils/form-renderer";
 import { createSpacer, getDuplicateFieldState } from "../../utils/tools";
 import CurrentForm from "../FormBuilder/Builder/CurrentForm";
 import DraggableSidebarField from "../FormBuilder/Builder/DraggableSidebarField";
-import FormBuilderSidebar from "../FormBuilderSidebar";
-import { Typography } from "antd";
+import FormBuilderSidebar from "../FormBuilder/Builder/FormBuilderSidebar";
+import { useImmer } from "use-immer";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 interface Props {
-  data: {
-    fields: DraggableField[];
-  };
-  updateData: Updater<{
-    fields: DraggableField[];
-  }>;
+  initialValues?: DraggableField[];
 }
 
-function EditForm({ data, updateData }: Props) {
+function FormBuilderZone({ initialValues }: Props) {
+  const [data, updateData] = useImmer<{ fields: DraggableField[] }>({
+    fields: initialValues ?? [],
+  });
   const [sidebarFieldsRegenKey, setSidebarFieldsRegenKey] = useState(
     crypto.randomUUID()
   );
@@ -253,50 +250,43 @@ function EditForm({ data, updateData }: Props) {
   };
 
   return (
-    <>
-      <div className="flex justify-center">
-        <Typography.Text className="text-center inline-block">
-          Double click to edit item
-        </Typography.Text>
-      </div>
-      <div className="flex flex-1 flex-row bg-gray-100">
-        <DndContext
-          autoScroll
-          onDragEnd={handleDragEnd}
-          onDragOver={handleDragOver}
-          onDragStart={handleDragStart}
+    <div className="flex flex-1 flex-row bg-gray-100">
+      <DndContext
+        autoScroll
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+        onDragStart={handleDragStart}
+      >
+        <FormBuilderSidebar fieldsRegKey={sidebarFieldsRegenKey} />
+
+        <SortableContext
+          items={data.fields.map((field) => field.id)}
+          strategy={verticalListSortingStrategy}
         >
-          <FormBuilderSidebar fieldsRegKey={sidebarFieldsRegenKey} />
-
-          <SortableContext
-            items={data.fields.map((field) => field.id)}
-            strategy={verticalListSortingStrategy}
+          <FormBuilderContext.Provider
+            value={{
+              currentDragfield: currentDragFieldRef.current,
+              dupplicateField,
+              fields: data.fields,
+              getFieldById,
+              onEndEdit,
+              onRemoveField,
+              onStartEdit,
+              updateFieldsData: updateData,
+            }}
           >
-            <FormBuilderContext.Provider
-              value={{
-                currentDragfield: currentDragFieldRef.current,
-                dupplicateField,
-                fields: data.fields,
-                getFieldById,
-                onEndEdit,
-                onRemoveField,
-                onStartEdit,
-                updateFieldsData: updateData,
-              }}
-            >
-              <CurrentForm />
-            </FormBuilderContext.Provider>
-          </SortableContext>
+            <CurrentForm />
+          </FormBuilderContext.Provider>
+        </SortableContext>
 
-          <DragOverlay>
-            {activeSidebarField ? (
-              <DraggableSidebarField field={activeSidebarField} />
-            ) : null}
-          </DragOverlay>
-        </DndContext>
-      </div>
-    </>
+        <DragOverlay>
+          {activeSidebarField ? (
+            <DraggableSidebarField field={activeSidebarField} />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+    </div>
   );
 }
 
-export default EditForm;
+export default FormBuilderZone;

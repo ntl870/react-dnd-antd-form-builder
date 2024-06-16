@@ -11,7 +11,7 @@ interface Props {
   id?: string;
 }
 
-export function DragField({ field, overlay, id }: Props) {
+export default function DragField({ field, overlay, id }: Props) {
   const { currentDragfield } = useContext(FormBuilderContext);
 
   const { type, state } = field;

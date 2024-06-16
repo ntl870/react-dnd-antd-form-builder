@@ -1,4 +1,3 @@
-/// <reference types="vite-plugin-svgr/client" />
 import Checkbox from "./checkbox.svg";
 import DatePicker from "./date-picker.svg";
 import Divider from "./divider.svg";
