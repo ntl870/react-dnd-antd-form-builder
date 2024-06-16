@@ -43,6 +43,7 @@ import EditRadioFieldSection from "./components/FormBuilder/Edit/EditRadioFieldS
 import EditSelectFieldSection from "./components/FormBuilder/Edit/EditSelectFieldSection";
 import EditSignatureFieldSection from "./components/FormBuilder/Edit/EditSignatureFieldSection";
 import EditTextFieldSection from "./components/FormBuilder/Edit/EditTextFieldSection";
+import { FormBuilderContext } from "./contexts/FormBuilderContext";
 import "./index.css";
 
 export {
@@ -54,6 +55,7 @@ export {
   DraggableSidebarField,
   DragHandle,
   FormBuilderCheckbox,
+  FormBuilderContext,
   FormBuilderDatePicker,
   FormBuilderDivider,
   FormBuilderDropzone,

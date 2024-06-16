@@ -9,11 +9,15 @@ export default defineConfig(() => {
     plugins: [
       react(),
       tsconfigPaths(),
-      dts({ include: ["lib"] }),
+      dts({
+        include: ["lib"],
+        insertTypesEntry: true,
+      }),
       libInjectCss(),
     ],
     server: {
       port: 3000,
+      open: "/demo/index.html",
     },
     resolve: {
       alias: [{ find: /^~/, replacement: "" }],
@@ -24,8 +28,8 @@ export default defineConfig(() => {
       sourcemap: false,
       assetsInclude: ["**/*.svg"],
       lib: {
-        entry: "lib/index.ts",
-        name: "index",
+        entry: "./lib/index.ts",
+        name: "react-dnd-antd-form-builder",
         formats: ["es"] as LibraryFormats[],
       },
       rollupOptions: {

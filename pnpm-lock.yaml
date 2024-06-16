@@ -46,6 +46,9 @@ devDependencies:
   '@types/react':
     specifier: ^18.2.79
     version: 18.2.79
+  '@types/react-dom':
+    specifier: ^18.3.0
+    version: 18.3.0
   '@types/react-signature-canvas':
     specifier: ^1.0.5
     version: 1.0.5
@@ -1184,6 +1187,12 @@ packages:
 
   /@types/prop-types@15.7.12:
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
+    dev: true
+
+  /@types/react-dom@18.3.0:
+    resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
+    dependencies:
+      '@types/react': 18.2.79
     dev: true
 
   /@types/react-signature-canvas@1.0.5:

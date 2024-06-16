@@ -5,7 +5,6 @@ import {
   DndContext,
   DragOverlay,
 } from "@dnd-kit/core";
-import { Typography } from "antd";
 import { useState, useRef } from "react";
 import { FormBuilderFieldType } from "../../constants/formBuilder";
 import { FormBuilderContext } from "../../contexts/FormBuilderContext";
@@ -251,49 +250,42 @@ function FormBuilderZone({ initialValues }: Props) {
   };
 
   return (
-    <>
-      <div className="flex justify-center">
-        <Typography.Text className="text-center inline-block">
-          Double click to edit item
-        </Typography.Text>
-      </div>
-      <div className="flex flex-1 flex-row bg-gray-100">
-        <DndContext
-          autoScroll
-          onDragEnd={handleDragEnd}
-          onDragOver={handleDragOver}
-          onDragStart={handleDragStart}
+    <div className="flex flex-1 flex-row bg-gray-100">
+      <DndContext
+        autoScroll
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+        onDragStart={handleDragStart}
+      >
+        <FormBuilderSidebar fieldsRegKey={sidebarFieldsRegenKey} />
+
+        <SortableContext
+          items={data.fields.map((field) => field.id)}
+          strategy={verticalListSortingStrategy}
         >
-          <FormBuilderSidebar fieldsRegKey={sidebarFieldsRegenKey} />
-
-          <SortableContext
-            items={data.fields.map((field) => field.id)}
-            strategy={verticalListSortingStrategy}
+          <FormBuilderContext.Provider
+            value={{
+              currentDragfield: currentDragFieldRef.current,
+              dupplicateField,
+              fields: data.fields,
+              getFieldById,
+              onEndEdit,
+              onRemoveField,
+              onStartEdit,
+              updateFieldsData: updateData,
+            }}
           >
-            <FormBuilderContext.Provider
-              value={{
-                currentDragfield: currentDragFieldRef.current,
-                dupplicateField,
-                fields: data.fields,
-                getFieldById,
-                onEndEdit,
-                onRemoveField,
-                onStartEdit,
-                updateFieldsData: updateData,
-              }}
-            >
-              <CurrentForm />
-            </FormBuilderContext.Provider>
-          </SortableContext>
+            <CurrentForm />
+          </FormBuilderContext.Provider>
+        </SortableContext>
 
-          <DragOverlay>
-            {activeSidebarField ? (
-              <DraggableSidebarField field={activeSidebarField} />
-            ) : null}
-          </DragOverlay>
-        </DndContext>
-      </div>
-    </>
+        <DragOverlay>
+          {activeSidebarField ? (
+            <DraggableSidebarField field={activeSidebarField} />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+    </div>
   );
 }
 
