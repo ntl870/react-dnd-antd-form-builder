@@ -36,18 +36,12 @@ export default defineConfig(() => ({
       input: {
         demo: './demo/index.html',
       },
-      output: [
-        // {
-        //   globals: {
-        //     react: 'React',
-        //     'react-dom': 'ReactDOM',
-        //   },
-        // },
-        {
-          name: 'demo',
-          dir: 'dist_demo',
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
         },
-      ],
+      },
     },
   },
 }));
