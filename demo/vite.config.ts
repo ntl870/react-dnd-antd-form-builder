@@ -7,7 +7,7 @@ export default defineConfig({
   resolve: {
     alias: [{ find: /^~/, replacement: '' }],
   },
-  base: './',
+  base: '/',
   server: {
     port: 3000,
     open: './demo/index.html',

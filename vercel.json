@@ -1,3 +1,0 @@
-{
-  "routes": [{ "src": "/dist_demo", "dest": "/demo/index.html" }]
-}
