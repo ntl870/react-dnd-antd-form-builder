@@ -14,10 +14,6 @@ export default defineConfig(() => ({
     }),
     libInjectCss(),
   ],
-  server: {
-    port: 3000,
-    open: '/demo/index.html',
-  },
   resolve: {
     alias: [{ find: /^~/, replacement: '' }],
   },
@@ -33,15 +29,6 @@ export default defineConfig(() => ({
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
-      input: {
-        demo: './demo/index.html',
-      },
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
     },
   },
 }));
