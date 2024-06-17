@@ -1,6 +1,6 @@
-import { Form, Input } from "antd";
-import { FormBuilderFieldType } from "../../../../constants/formBuilder";
-import { FormPreviewerFieldCommonProps } from "../../../../types/draggableFields.types";
+import { Form, Input } from 'antd';
+import { FormBuilderFieldType } from '../../../../constants/formBuilder';
+import { FormPreviewerFieldCommonProps } from '../../../../types/draggableFields.types';
 
 interface Props extends FormPreviewerFieldCommonProps {
   placeholder?: string;

@@ -1,5 +1,4 @@
-import classNames from "classnames";
-import { twMerge } from "tailwind-merge";
+import classNames from 'classnames';
+import { twMerge } from 'tailwind-merge';
 
-export const twClassMerge = (...input: classNames.ArgumentArray) =>
-  twMerge(classNames(input));
+export const twClassMerge = (...input: classNames.ArgumentArray) => twMerge(classNames(input));

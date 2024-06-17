@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { Form, Upload } from "antd";
-import { FormPreviewerFieldCommonProps } from "../../../../types/draggableFields.types";
+import { Form, Upload } from 'antd';
+import { FormPreviewerFieldCommonProps } from '../../../../types/draggableFields.types';
 
 interface Props extends FormPreviewerFieldCommonProps {}
 

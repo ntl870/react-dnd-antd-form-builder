@@ -1,30 +1,26 @@
-import type { ChangeEvent } from "react";
-import { useContext, useState } from "react";
-import { Icon } from "@iconify/react";
-import { Button, Input, Typography } from "antd";
-import EditFieldButtons from "../EditFieldButtons";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
-import { OptionType } from "../../../../types/draggableFields.types";
+import type { ChangeEvent } from 'react';
+import { useContext, useState } from 'react';
+import { Icon } from '@iconify/react';
+import { Button, Input, Typography } from 'antd';
+import EditFieldButtons from '../EditFieldButtons';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
+import { OptionType } from '../../../../types/draggableFields.types';
 
 interface Props {
   id?: string;
 }
 
 function EditSelectFieldSection({ id }: Props) {
-  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } =
-    useContext(FormBuilderContext);
+  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } = useContext(FormBuilderContext);
   const currentField = getFieldById(id);
   const state = currentField?.state;
   const [options, setOptions] = useState<OptionType[]>(state?.options ?? []);
-  const [title, setTitle] = useState<string>(state?.title ?? "");
+  const [title, setTitle] = useState<string>(state?.title ?? '');
   const [required, setRequired] = useState<boolean>(state?.required ?? false);
 
   const handleAddOption = () => {
-    setOptions((prev) => [
-      ...prev,
-      { name: `option${prev.length + 1}`, value: `Option ${prev.length + 1}` },
-    ]);
+    setOptions((prev) => [...prev, { name: `option${prev.length + 1}`, value: `Option ${prev.length + 1}` }]);
   };
 
   const onSave = () => {
@@ -32,7 +28,12 @@ function EditSelectFieldSection({ id }: Props) {
       const field = draft.fields.find((field) => field.id === id);
 
       if (field?.state) {
-        field.state = { ...field.state, options, required, title };
+        field.state = {
+          ...field.state,
+          options,
+          required,
+          title,
+        };
       }
     });
 
@@ -43,10 +44,7 @@ function EditSelectFieldSection({ id }: Props) {
     setOptions((prev) => prev.filter((_, index) => index !== targetIndex));
   };
 
-  const onChangeSelectField = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const onChangeSelectField = (event: ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = event.target;
     setOptions((prev) => {
       const newOptions = [...prev];
@@ -76,22 +74,13 @@ function EditSelectFieldSection({ id }: Props) {
     <div>
       <div className="flex flex-col">
         <Typography.Text>Title</Typography.Text>
-        <Input
-          className="max-w-md mb-8"
-          onChange={onChangeTitle}
-          placeholder="Title"
-          value={title}
-        />
+        <Input className="max-w-md mb-8" onChange={onChangeTitle} placeholder="Title" value={title} />
         <Typography.Text>Options</Typography.Text>
         {options.map((option, index) => (
-          <div className="flex flex-row items-center" key={index}>
+          <div key={crypto.randomUUID()} className="flex flex-row items-center">
             <div className="mr-2 w-full mb-2">
               <div className="flex items-center">
-                <Input
-                  className="max-w-md mr-2"
-                  onChange={(e) => onChangeSelectField(e, index)}
-                  value={option.value}
-                />
+                <Input className="max-w-md mr-2" onChange={(e) => onChangeSelectField(e, index)} value={option.value} />
                 {options.length > 1 && (
                   <Icon
                     className="cursor-pointer"

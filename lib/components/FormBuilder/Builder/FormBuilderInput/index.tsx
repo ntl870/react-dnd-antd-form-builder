@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { Input, Typography } from "antd";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
-import { InputFieldEditState } from "../../../../types/draggableFields.types";
+import { useContext } from 'react';
+import { Input, Typography } from 'antd';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
+import { InputFieldEditState } from '../../../../types/draggableFields.types';
 
 interface Props extends InputFieldEditState {
   isTextArea?: boolean;

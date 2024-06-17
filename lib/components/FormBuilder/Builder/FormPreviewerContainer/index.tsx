@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import type { FormProps } from "antd";
-import { Form } from "antd";
-import FormPreviewer from "../FormPreviewer";
-import { DraggableField } from "../../../../types/draggableFields.types";
+import { useEffect } from 'react';
+import type { FormProps } from 'antd';
+import { Form } from 'antd';
+import FormPreviewer from '../FormPreviewer';
+import { DraggableField } from '../../../../types/draggableFields.types';
 
 interface Props extends FormProps {
   forms: DraggableField[];

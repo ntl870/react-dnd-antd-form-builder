@@ -1,16 +1,17 @@
-import { useContext, useState } from "react";
-import { Input, Typography } from "antd";
-import EditFieldButtons from "../EditFieldButtons";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
+import { useContext, useState } from 'react';
+import { Input, Typography } from 'antd';
+import EditFieldButtons from '../EditFieldButtons';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
 
 interface Props {
   id?: string;
 }
 
 function EditDatePickerFieldSection({ id }: Props) {
-  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } =
-    useContext(FormBuilderContext);
+  const {
+    onEndEdit, updateFieldsData, onRemoveField, getFieldById,
+  } = useContext(FormBuilderContext);
   const currentField = getFieldById(id);
 
   const [state, setState] = useState(currentField?.state ?? null);

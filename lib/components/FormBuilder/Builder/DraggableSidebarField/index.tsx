@@ -1,30 +1,33 @@
-import { useRef } from "react";
-import { useDraggable } from "@dnd-kit/core";
-import FormBuilderSidebarItem from "../FormBuilderSidebarItem";
-import { SidebarComponent } from "../../../../types/draggableFields.types";
+import { useRef, ReactNode } from 'react';
+import { useDraggable } from '@dnd-kit/core';
+import { FormBuilderFieldType } from '../../../../constants/formBuilder';
 
 interface Props {
-  field: SidebarComponent;
+  children: ReactNode;
+  type: FormBuilderFieldType;
 }
 
-export default function DraggableSidebarField({ field }: Props) {
+export default function DraggableSidebarFieldWrapper({ children, type }: Props) {
   const id = useRef(crypto.randomUUID());
 
   const { attributes, listeners, setNodeRef } = useDraggable({
     data: {
-      field,
+      field: {
+        type,
+      },
       fromSidebar: true,
     },
     id: id.current,
   });
 
   return (
-    <div className="cursor-pointer" ref={setNodeRef}>
-      <FormBuilderSidebarItem
+    <div ref={setNodeRef} {...attributes} {...listeners} className="cursor-pointer">
+      {children}
+      {/* <FormBuilderSidebarItem
         attributes={attributes}
         listeners={listeners}
         type={field.type}
-      />
+      /> */}
     </div>
   );
 }

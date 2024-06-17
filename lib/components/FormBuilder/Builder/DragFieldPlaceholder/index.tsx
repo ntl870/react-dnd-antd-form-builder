@@ -1,6 +1,6 @@
-import { Typography } from "antd";
-import { getDragFieldPlaceholderTitle } from "../../../../utils/form-renderer";
-import { FormBuilderFieldType } from "../../../../constants/formBuilder";
+import { Typography } from 'antd';
+import { getDragFieldPlaceholderTitle } from '../../../../utils/form-renderer';
+import { FormBuilderFieldType } from '../../../../constants/formBuilder';
 
 interface Props {
   type?: FormBuilderFieldType;

@@ -1,6 +1,6 @@
-import { Typography } from "antd";
-import { SignatureFieldEditState } from "../../../../types/draggableFields.types";
-import { Signature } from "../../../../assets";
+import { Typography } from 'antd';
+import { SignatureFieldEditState } from '../../../../types/draggableFields.types';
+import { Signature } from '../../../../assets';
 
 interface Props extends SignatureFieldEditState {}
 

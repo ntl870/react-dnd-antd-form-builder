@@ -1,6 +1,8 @@
-import { useContext } from "react";
-import { Button, Divider, Switch, Typography } from "antd";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
+import { useContext } from 'react';
+import {
+  Button, Divider, Switch, Typography,
+} from 'antd';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
 
 interface Props {
   requiredValue?: boolean;

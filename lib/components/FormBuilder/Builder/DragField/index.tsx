@@ -1,9 +1,11 @@
-import { useContext } from "react";
-import DragFieldPlaceholder from "../DragFieldPlaceholder";
-import { FormBuilderFieldType } from "../../../../constants/formBuilder";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
-import { DraggableField } from "../../../../types/draggableFields.types";
-import { getRenderer } from "../../../../utils/form-renderer";
+import { useContext } from 'react';
+import DragFieldPlaceholder from '../DragFieldPlaceholder';
+import { FormBuilderFieldType } from '../../../../constants/formBuilder';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
+import { DraggableField } from '../../../../types/draggableFields.types';
+import { getRenderer } from '../../../../utils/form-renderer';
+import EditFieldSectionWrapper from '../../Edit/EditFieldSectionWrapper';
+import { twClassMerge } from '../../../../utils/tailwind';
 
 interface Props {
   field: DraggableField;
@@ -13,8 +15,7 @@ interface Props {
 
 export default function DragField({ field, overlay, id }: Props) {
   const { currentDragfield } = useContext(FormBuilderContext);
-
-  const { type, state } = field;
+  const { type } = field;
   const { isEdit } = field.state;
   const Component = getRenderer(type);
 
@@ -24,11 +25,14 @@ export default function DragField({ field, overlay, id }: Props) {
 
   return (
     <div
-      className={`${!isEdit ? " pointer-events-none" : ""}${
-        overlay ? " opacity-50" : ""
-      }`}
+      className={twClassMerge({
+        'pointer-events-none': !isEdit,
+        'opacity-50': overlay,
+      })}
     >
-      <Component id={id} {...state} />
+      <EditFieldSectionWrapper id={id} isEdit={!!isEdit} type={type}>
+        <Component id={id} />
+      </EditFieldSectionWrapper>
     </div>
   );
 }

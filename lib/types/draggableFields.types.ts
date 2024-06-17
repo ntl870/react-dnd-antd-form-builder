@@ -1,4 +1,4 @@
-import type { FormBuilderFieldType } from "../constants/formBuilder";
+import type { FormBuilderFieldType } from '../constants/formBuilder';
 
 export interface DraggableFieldCommonState {
   isEdit?: boolean;
@@ -85,6 +85,5 @@ export interface DraggableField {
 }
 
 export interface SidebarComponent {
-  title?: string;
   type: FormBuilderFieldType;
 }

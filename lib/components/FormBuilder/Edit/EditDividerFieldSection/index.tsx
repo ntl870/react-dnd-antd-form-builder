@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { Typography } from "antd";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
+import { useContext } from 'react';
+import { Typography } from 'antd';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
 
 interface Props {
   id?: string;

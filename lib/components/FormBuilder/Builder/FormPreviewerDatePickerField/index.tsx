@@ -1,5 +1,5 @@
-import { DatePicker, Form } from "antd";
-import { FormPreviewerFieldCommonProps } from "../../../../types/draggableFields.types";
+import { DatePicker, Form } from 'antd';
+import { FormPreviewerFieldCommonProps } from '../../../../types/draggableFields.types';
 
 interface Props extends FormPreviewerFieldCommonProps {
   ratingValue?: number;
@@ -11,7 +11,7 @@ function FormPreviewerDatePickerField({ placeholder, ...rest }: Props) {
     <Form.Item {...rest}>
       <DatePicker
         className="w-full"
-        placeholder={placeholder || "Select date"}
+        placeholder={placeholder || 'Select date'}
       />
     </Form.Item>
   );

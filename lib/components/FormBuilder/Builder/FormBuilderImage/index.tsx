@@ -1,5 +1,5 @@
-import { Image } from "antd";
-import { ImageFieldEditState } from "../../../../types/draggableFields.types";
+import { Image } from 'antd';
+import { ImageFieldEditState } from '../../../../types/draggableFields.types';
 
 interface Props extends ImageFieldEditState {}
 

@@ -1,8 +1,8 @@
-import { Checkbox, Form } from "antd";
+import { Checkbox, Form } from 'antd';
 import {
   CheckBoxType,
   FormPreviewerFieldCommonProps,
-} from "../../../../types/draggableFields.types";
+} from '../../../../types/draggableFields.types';
 
 interface Props extends FormPreviewerFieldCommonProps {
   checkBoxOptions?: CheckBoxType[];

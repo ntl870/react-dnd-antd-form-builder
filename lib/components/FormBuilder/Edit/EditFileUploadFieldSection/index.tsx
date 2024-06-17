@@ -1,15 +1,16 @@
-import { useContext, useState } from "react";
-import { Button, Input, Typography } from "antd";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
+import { useContext, useState } from 'react';
+import { Button, Input, Typography } from 'antd';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
 
 interface Props {
   id?: string;
 }
 
 function EditFileUploadFieldSection({ id }: Props) {
-  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } =
-    useContext(FormBuilderContext);
+  const {
+    onEndEdit, updateFieldsData, onRemoveField, getFieldById,
+  } = useContext(FormBuilderContext);
   const currentField = getFieldById(id);
 
   const [state, setState] = useState(currentField?.state ?? null);

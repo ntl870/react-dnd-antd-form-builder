@@ -1,20 +1,21 @@
-import { useContext, useState } from "react";
-import { Input, Typography } from "antd";
-import EditFieldButtons from "../EditFieldButtons";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
-import { TextFieldEditState } from "../../../../types/draggableFields.types";
+import { useContext, useState } from 'react';
+import { Input, Typography } from 'antd';
+import EditFieldButtons from '../EditFieldButtons';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
+import { TextFieldEditState } from '../../../../types/draggableFields.types';
 
 interface Props {
   id?: string;
 }
 
 function EditTextFieldSection({ id }: Props) {
-  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } =
-    useContext(FormBuilderContext);
+  const {
+    onEndEdit, updateFieldsData, onRemoveField, getFieldById,
+  } = useContext(FormBuilderContext);
   const currentField = getFieldById(id);
   const [state, setState] = useState<TextFieldEditState | null>(
-    currentField?.state ?? null
+    currentField?.state ?? null,
   );
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { Typography } from "antd";
-import { FormBuilderFieldType } from "../../../../constants/formBuilder";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
-import { TextFieldEditState } from "../../../../types/draggableFields.types";
+import { useContext } from 'react';
+import { Typography } from 'antd';
+import { FormBuilderFieldType } from '../../../../constants/formBuilder';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
+import { TextFieldEditState } from '../../../../types/draggableFields.types';
 
 interface Props extends TextFieldEditState {
   type:

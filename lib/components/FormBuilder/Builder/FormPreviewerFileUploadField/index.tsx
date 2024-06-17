@@ -1,6 +1,6 @@
-import { Icon } from "@iconify/react";
-import { Button, Form, Upload } from "antd";
-import { FormPreviewerFieldCommonProps } from "../../../../types/draggableFields.types";
+import { Icon } from '@iconify/react';
+import { Button, Form, Upload } from 'antd';
+import { FormPreviewerFieldCommonProps } from '../../../../types/draggableFields.types';
 
 interface Props extends FormPreviewerFieldCommonProps {}
 

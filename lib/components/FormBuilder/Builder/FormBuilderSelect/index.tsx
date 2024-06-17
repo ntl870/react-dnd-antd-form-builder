@@ -1,18 +1,23 @@
-import { Select, Typography } from "antd";
-import { SelectFieldEditState } from "../../../../types/draggableFields.types";
+import { Select, Typography } from 'antd';
+import { useContext } from 'react';
+import { SelectFieldEditState } from '../../../../types/draggableFields.types';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
 
 interface Props extends SelectFieldEditState {}
 
-function FormBuilderSelect({ options, title }: Props) {
-  const formattedOptions = options?.map((option) => ({
+function FormBuilderSelect({ id }: Props) {
+  const { getFieldById } = useContext(FormBuilderContext);
+  const currentField = getFieldById(id);
+
+  const formattedOptions = currentField?.state?.options?.map((option) => ({
     label: option.value,
     value: option.value,
   }));
 
   return (
     <div className="flex flex-col">
-      <Typography.Text>{title}</Typography.Text>
-      <Select options={formattedOptions} placeholder={title} />
+      <Typography.Text>{currentField?.state?.title}</Typography.Text>
+      <Select options={formattedOptions} placeholder={currentField?.state?.placeholder} />
     </div>
   );
 }

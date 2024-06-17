@@ -1,6 +1,6 @@
-import type { DraggableAttributes } from "@dnd-kit/core";
-import type { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
-import { Drag } from "../../../../assets";
+import type { DraggableAttributes } from '@dnd-kit/core';
+import type { SyntheticListenerMap } from '@dnd-kit/core/dist/hooks/utilities';
+import { Drag } from '../../../../assets';
 
 interface Props {
   attributes: DraggableAttributes;

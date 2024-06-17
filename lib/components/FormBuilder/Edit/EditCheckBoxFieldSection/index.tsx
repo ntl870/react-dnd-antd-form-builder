@@ -1,26 +1,20 @@
-import type { ChangeEvent } from "react";
-import { useContext, useState } from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button, Input, Typography } from "antd";
-import EditFieldButtons from "../EditFieldButtons";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
-import {
-  CheckboxFieldEditState,
-  CheckBoxType,
-} from "../../../../types/draggableFields.types";
+import type { ChangeEvent } from 'react';
+import { useContext, useState } from 'react';
+import { Icon } from '@iconify/react/dist/iconify.js';
+import { Button, Input, Typography } from 'antd';
+import EditFieldButtons from '../EditFieldButtons';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
+import { CheckboxFieldEditState, CheckBoxType } from '../../../../types/draggableFields.types';
 
 interface Props extends CheckboxFieldEditState {}
 
 function EditCheckBoxFieldSection({ id }: Props) {
-  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } =
-    useContext(FormBuilderContext);
+  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } = useContext(FormBuilderContext);
   const currentField = getFieldById(id);
   const state = currentField?.state;
-  const [options, setOptions] = useState<CheckBoxType[]>(
-    state?.checkBoxOptions ?? []
-  );
-  const [title, setTitle] = useState<string>(state?.title ?? "");
+  const [options, setOptions] = useState<CheckBoxType[]>(state?.checkBoxOptions ?? []);
+  const [title, setTitle] = useState<string>(state?.title ?? '');
   const [required, setRequired] = useState<boolean>(state?.required ?? false);
 
   const handleAddOption = () => {
@@ -54,10 +48,7 @@ function EditCheckBoxFieldSection({ id }: Props) {
     setOptions((prev) => prev.filter((_, index) => index !== targetIndex));
   };
 
-  const onChangeSelectField = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const onChangeSelectField = (event: ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = event.target;
     setOptions((prev) => {
       const newOptions = [...prev];
@@ -87,22 +78,13 @@ function EditCheckBoxFieldSection({ id }: Props) {
     <div>
       <div className="flex flex-col">
         <Typography.Text>Title</Typography.Text>
-        <Input
-          className="max-w-md mb-8"
-          onChange={onChangeTitle}
-          placeholder="Title"
-          value={title}
-        />
+        <Input className="max-w-md mb-8" onChange={onChangeTitle} placeholder="Title" value={title} />
         <Typography.Text>Options</Typography.Text>
         {options.map((option, index) => (
-          <div className="flex flex-row items-center" key={index}>
+          <div key={crypto.randomUUID()} className="flex flex-row items-center">
             <div className="mr-2 w-full mb-2">
               <div className="flex items-center">
-                <Input
-                  className="max-w-md mr-2"
-                  onChange={(e) => onChangeSelectField(e, index)}
-                  value={option.value}
-                />
+                <Input className="max-w-md mr-2" onChange={(e) => onChangeSelectField(e, index)} value={option.value} />
                 {options.length > 1 && (
                   <Icon
                     className="cursor-pointer"

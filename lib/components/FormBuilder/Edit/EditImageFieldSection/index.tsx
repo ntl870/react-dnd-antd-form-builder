@@ -1,17 +1,16 @@
-import { useContext, useState } from "react";
-import { Icon } from "@iconify/react";
-import { Button, Typography, Upload } from "antd";
-import type { UploadFile, UploadProps } from "antd/es/upload/interface";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
+import { useContext, useState } from 'react';
+import { Icon } from '@iconify/react';
+import { Button, Typography, Upload } from 'antd';
+import type { UploadFile, UploadProps } from 'antd/es/upload/interface';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
 
 interface Props {
   id?: string;
 }
 
 function EditImageFieldSection({ id }: Props) {
-  const { onEndEdit, onRemoveField, getFieldById } =
-    useContext(FormBuilderContext);
+  const { onEndEdit, onRemoveField, getFieldById } = useContext(FormBuilderContext);
   const currentField = getFieldById(id);
 
   const currentPathFile = currentField?.state.pathFile;
@@ -19,7 +18,7 @@ function EditImageFieldSection({ id }: Props) {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [showRequiredImageError, setShowRequiredImageError] = useState(false);
 
-  const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+  const onChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
     setFileList(newFileList);
     setShowRequiredImageError(false);
   };

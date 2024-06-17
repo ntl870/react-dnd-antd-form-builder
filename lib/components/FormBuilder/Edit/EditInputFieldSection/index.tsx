@@ -1,21 +1,22 @@
-import { useContext, useState } from "react";
-import { Input, Typography } from "antd";
-import EditFieldButtons from "../EditFieldButtons";
-import EditFieldSectionToolbar from "../EditFieldSectionToolbar";
-import { FormBuilderContext } from "../../../../contexts/FormBuilderContext";
-import { InputFieldEditState } from "../../../../types/draggableFields.types";
+import { useContext, useState } from 'react';
+import { Input, Typography } from 'antd';
+import EditFieldButtons from '../EditFieldButtons';
+import EditFieldSectionToolbar from '../EditFieldSectionToolbar';
+import { FormBuilderContext } from '../../../../contexts/FormBuilderContext';
+import { InputFieldEditState } from '../../../../types/draggableFields.types';
 
 interface Props {
   id?: string;
 }
 
 function EditInputFieldSection({ id }: Props) {
-  const { onEndEdit, updateFieldsData, onRemoveField, getFieldById } =
-    useContext(FormBuilderContext);
+  const {
+    onEndEdit, updateFieldsData, onRemoveField, getFieldById,
+  } = useContext(FormBuilderContext);
   const currentField = getFieldById(id);
 
   const [state, setState] = useState<InputFieldEditState | null>(
-    currentField?.state ?? null
+    currentField?.state ?? null,
   );
 
   const onAccept = () => {

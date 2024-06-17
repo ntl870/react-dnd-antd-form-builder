@@ -1,24 +1,14 @@
-import { lazy } from "react";
-import EditDividerFieldSection from "../EditDividerFieldSection";
-import { FormBuilderFieldType } from "../../../../constants/formBuilder";
-
-const EditCheckBoxFieldSection = lazy(
-  () => import("../EditCheckBoxFieldSection")
-);
-const EditDatePickerSection = lazy(
-  () => import("../EditDatePickerFieldSection")
-);
-const EditFileUploadFieldSection = lazy(
-  () => import("../EditFileUploadFieldSection")
-);
-const EditImageFieldSection = lazy(() => import("../EditImageFieldSection"));
-const EditInputFieldSection = lazy(() => import("../EditInputFieldSection"));
-const EditRadioFieldSection = lazy(() => import("../EditRadioFieldSection"));
-const EditSelectFieldSection = lazy(() => import("../EditSelectFieldSection"));
-const EditSignatureFieldSection = lazy(
-  () => import("../EditSignatureFieldSection")
-);
-const EditTextFieldSection = lazy(() => import("../EditTextFieldSection"));
+import EditDividerFieldSection from '../EditDividerFieldSection';
+import { FormBuilderFieldType } from '../../../../constants/formBuilder';
+import EditCheckBoxFieldSection from '../EditCheckBoxFieldSection';
+import EditFileUploadFieldSection from '../EditFileUploadFieldSection';
+import EditImageFieldSection from '../EditImageFieldSection';
+import EditInputFieldSection from '../EditInputFieldSection';
+import EditRadioFieldSection from '../EditRadioFieldSection';
+import EditSelectFieldSection from '../EditSelectFieldSection';
+import EditSignatureFieldSection from '../EditSignatureFieldSection';
+import EditTextFieldSection from '../EditTextFieldSection';
+import EditDatePickerFieldSection from '../EditDatePickerFieldSection';
 
 interface Props {
   children: React.ReactNode;
@@ -27,7 +17,9 @@ interface Props {
   type?: FormBuilderFieldType;
 }
 
-function EditFieldSectionWrapper({ children, isEdit, id, type }: Props) {
+function EditFieldSectionWrapper({
+  children, isEdit, id, type,
+}: Props) {
   if (isEdit) {
     switch (type) {
       case FormBuilderFieldType.Input:
@@ -44,7 +36,7 @@ function EditFieldSectionWrapper({ children, isEdit, id, type }: Props) {
       case FormBuilderFieldType.Radio:
         return <EditRadioFieldSection id={id} />;
       case FormBuilderFieldType.DatePicker:
-        return <EditDatePickerSection id={id} />;
+        return <EditDatePickerFieldSection id={id} />;
       case FormBuilderFieldType.FileUpload:
         return <EditFileUploadFieldSection id={id} />;
       case FormBuilderFieldType.Signature:

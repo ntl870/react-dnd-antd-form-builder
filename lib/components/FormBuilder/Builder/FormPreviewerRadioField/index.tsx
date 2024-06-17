@@ -1,8 +1,8 @@
-import { Form, Radio } from "antd";
+import { Form, Radio } from 'antd';
 import {
   FormPreviewerFieldCommonProps,
   RadioType,
-} from "../../../../types/draggableFields.types";
+} from '../../../../types/draggableFields.types';
 
 interface Props extends FormPreviewerFieldCommonProps {
   radioOptions?: RadioType[];

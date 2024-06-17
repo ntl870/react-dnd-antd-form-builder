@@ -1,8 +1,8 @@
-import { Form, Select } from "antd";
+import { Form, Select } from 'antd';
 import {
   FormPreviewerFieldCommonProps,
   OptionType,
-} from "../../../../types/draggableFields.types";
+} from '../../../../types/draggableFields.types';
 
 interface Props extends FormPreviewerFieldCommonProps {
   options?: OptionType[];

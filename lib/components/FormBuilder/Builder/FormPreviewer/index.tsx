@@ -1,36 +1,36 @@
-import { Suspense, lazy } from "react";
-import { Form, Spin } from "antd";
-import FormPreviewerDividerField from "../FormPreviewerDividerField";
-import ViewDocumentUploadField from "../FormPreviewerFileUploadField/ViewDocumentUploadField";
-import { FormBuilderFieldType } from "../../../../constants/formBuilder";
-import { DraggableField } from "../../../../types/draggableFields.types";
-import { twClassMerge } from "../../../../utils/tailwind";
+import { Suspense, lazy } from 'react';
+import { Form, Spin } from 'antd';
+import FormPreviewerDividerField from '../FormPreviewerDividerField';
+import ViewDocumentUploadField from '../FormPreviewerFileUploadField/ViewDocumentUploadField';
+import { FormBuilderFieldType } from '../../../../constants/formBuilder';
+import { DraggableField } from '../../../../types/draggableFields.types';
+import { twClassMerge } from '../../../../utils/tailwind';
 
 const FormPreviewerCheckbox = lazy(
-  () => import("../FormPreviewerCheckboxField")
+  () => import('../FormPreviewerCheckboxField'),
 );
 const FormPreviewerDatePickerField = lazy(
-  () => import("../FormPreviewerDatePickerField")
+  () => import('../FormPreviewerDatePickerField'),
 );
 const FormPreviewerFileUploadField = lazy(
-  () => import("../FormPreviewerFileUploadField")
+  () => import('../FormPreviewerFileUploadField'),
 );
 const FormPreviewerImageField = lazy(
-  () => import("../FormPreviewerImageField")
+  () => import('../FormPreviewerImageField'),
 );
 const FormPreviewerInputField = lazy(
-  () => import("../FormPreviewerInputField")
+  () => import('../FormPreviewerInputField'),
 );
 const FormPreviewerRadioField = lazy(
-  () => import("../FormPreviewerRadioField")
+  () => import('../FormPreviewerRadioField'),
 );
 const FormPreviewerSelectField = lazy(
-  () => import("../FormPreviewerSelectField")
+  () => import('../FormPreviewerSelectField'),
 );
 const FormPreviewerSignatureField = lazy(
-  () => import("../FormPreviewerSignatureField")
+  () => import('../FormPreviewerSignatureField'),
 );
-const FormPreviewerTextField = lazy(() => import("../FormPreviewerTextField"));
+const FormPreviewerTextField = lazy(() => import('../FormPreviewerTextField'));
 
 interface Props {
   forms: DraggableField[];
@@ -42,19 +42,19 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
   return (
     <div
       className={twClassMerge(
-        "max-w-[1000px] self-center m-auto bg-white opacity-100 p-8 mt-4 rounded-xl",
+        'max-w-[1000px] self-center m-auto bg-white opacity-100 p-8 mt-4 rounded-xl',
         {
-          ["pointer-events-none"]: !isEdit,
-        }
+          'pointer-events-none': !isEdit,
+        },
       )}
     >
       {forms.map((form) => {
         if (
-          form.type === FormBuilderFieldType.Input ||
-          form.type === FormBuilderFieldType.TextArea
-        )
+          form.type === FormBuilderFieldType.Input
+          || form.type === FormBuilderFieldType.TextArea
+        ) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <FormPreviewerInputField
                 key={form.id}
                 label={form.state.title}
@@ -65,10 +65,11 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
               />
             </Suspense>
           );
+        }
 
         if (form.type === FormBuilderFieldType.Select) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <FormPreviewerSelectField
                 key={form.id}
                 label={form.state.title}
@@ -82,15 +83,15 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
         }
 
         if (
-          form.type === FormBuilderFieldType.HeadingOne ||
-          form.type === FormBuilderFieldType.HeadingTwo ||
-          form.type === FormBuilderFieldType.Paragraph
+          form.type === FormBuilderFieldType.HeadingOne
+          || form.type === FormBuilderFieldType.HeadingTwo
+          || form.type === FormBuilderFieldType.Paragraph
         ) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <FormPreviewerTextField
-                description={form.state.description}
                 key={form.id}
+                description={form.state.description}
                 title={form.state.title}
                 type={form.type}
               />
@@ -100,10 +101,10 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
 
         if (form.type === FormBuilderFieldType.Checkbox) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <FormPreviewerCheckbox
-                checkBoxOptions={form.state.checkBoxOptions}
                 key={form.id}
+                checkBoxOptions={form.state.checkBoxOptions}
                 label={form.state.title}
                 name={form.name}
                 required={form.state.required}
@@ -114,7 +115,7 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
 
         if (form.type === FormBuilderFieldType.Radio) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <FormPreviewerRadioField
                 key={form.id}
                 label={form.state.title}
@@ -128,7 +129,7 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
 
         if (form.type === FormBuilderFieldType.DatePicker) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <FormPreviewerDatePickerField
                 key={form.id}
                 label={form.state.title}
@@ -142,30 +143,28 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
 
         if (form.type === FormBuilderFieldType.Image) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
-              <FormPreviewerImageField key={form.id} src={""} />
+            <Suspense key={form.id} fallback={<Spin />}>
+              <FormPreviewerImageField key={form.id} src="" />
             </Suspense>
           );
         }
 
         if (form.type === FormBuilderFieldType.FileUpload) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <Form.Item shouldUpdate>
-                {({ getFieldValue }) =>
-                  !isEdit && getFieldValue(form.name) ? (
-                    <ViewDocumentUploadField
-                      label={form.state.title}
-                      name={form.name}
-                    />
-                  ) : (
-                    <FormPreviewerFileUploadField
-                      label={form.state.title}
-                      name={form.name}
-                      required={form.state.required}
-                    />
-                  )
-                }
+                {({ getFieldValue }) => (!isEdit && getFieldValue(form.name) ? (
+                  <ViewDocumentUploadField
+                    label={form.state.title}
+                    name={form.name}
+                  />
+                ) : (
+                  <FormPreviewerFileUploadField
+                    label={form.state.title}
+                    name={form.name}
+                    required={form.state.required}
+                  />
+                ))}
               </Form.Item>
             </Suspense>
           );
@@ -173,13 +172,13 @@ function FormPreviewer({ forms, isEdit, isFill }: Props) {
 
         if (form.type === FormBuilderFieldType.Signature) {
           return (
-            <Suspense fallback={<Spin />} key={form.id}>
+            <Suspense key={form.id} fallback={<Spin />}>
               <Form.Item shouldUpdate>
                 {() => (
                   <FormPreviewerSignatureField
+                    key={form.id}
                     isEdit={!!isEdit}
                     isFill={isFill}
-                    key={form.id}
                     label={form.state.title}
                     name={form.name}
                     required={form.state.required}
